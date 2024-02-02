@@ -1,0 +1,12 @@
+GET http://localhost:8080/users/
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoib25lIiwiaWF0IjoxNzA2MTc4ODM3fQ.Sf0h1HD9td_Y4JIBntKMpl5-kQ2W-slKCBshHs5sCC8
+
+###
+
+POST http://localhost:8080/login/
+Content-Type: application/json
+
+{
+    "email": "bolor@gmail.com",
+    "passport": "12345678"
+}
