@@ -19,22 +19,21 @@ app.get("/", (req, res) => {
 
 app.post("/users", async (req, res) => {
   const { name, email, passport } = req.body;
-
+  console.log("req.body", req.body);
   if (!name || !email || !passport) {
     return res.status(400).send({ error: "Missing required fields" });
   }
 
   const encryptedPassword = await bcrypt.hash(passport, 10);
-
+  console.log("successfully encrypt", encryptedPassword);
   try {
-    // console.log("email", email);
-    // console.log("passport", passport);
-    // console.log("name", name);
     await sql`INSERT INTO users (email, name, passport, avatarImg, createdAt, updatedAt)
     VALUES (${email}, ${name}, ${encryptedPassword}, 'img', ${new Date()}, ${new Date()} );`;
+    console.log("successfully queried");
 
     res.status(201).send({ message: "Successfully Created" });
   } catch (error) {
+    console.log(error);
     res.status(500).send({ message: "internal server error gne" });
   }
 });
@@ -60,9 +59,9 @@ app.post("/login", async (req, res) => {
       return res.status(401).send("Passport not match");
     }
 
-    // const token = jwt.sign({ userId: userData[0].id }, secretKey, {
-    //   expiresIn: "10h",
-    // });
+    const token = jwt.sign({ userId: userData[0].id }, secretKey, {
+      expiresIn: "10h",
+    });
 
     res.status(201).send({ message: "Successfully Login" });
   } catch (error) {
