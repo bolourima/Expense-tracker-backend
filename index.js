@@ -1,14 +1,14 @@
-// require("dotenv").config();
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
 const { sql } = require("./db");
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 const PORT = 8080;
-// const secretKey = process.env.SECRET_KEY;
+const secretKey = process.env.SECRET_KEY;
 
 app.use(express.json());
 app.use(cors());
