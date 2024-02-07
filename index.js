@@ -14,7 +14,11 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+  try {
+    res.send("Hello world!");
+  } catch (error) {
+    console.log("ERROR: ", error);
+  }
 });
 
 app.post("/users", async (req, res) => {
